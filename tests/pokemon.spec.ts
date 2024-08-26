@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test'
 import PokemonPage from '../pom/pokemonPage'
 
-test('Check Title', async ({ page }) => {
+test('[3] Check Title', async ({ page }) => {
     await page.goto('/')
     const pokemonPage = new PokemonPage(page)
     await expect(pokemonPage.title).toBeVisible()
 })
 
-test('Check Pokemon List', async ({ page }) => {
+test('[4] Check Pokemon List', async ({ page }) => {
     await page.goto('/')
     const pokemonPage = new PokemonPage(page)
     await expect(pokemonPage.listImages.getByAltText('pikachu')).toBeVisible()
@@ -28,7 +28,7 @@ test.describe('Smoke end to end', () => {
 
     test.describe.configure({ mode: 'serial' })
 
-    test('Warning message when pokemon is not selected', async ({page}) => {
+    test('[5] Warning message when pokemon is not selected', async ({page}) => {
         
         const pokemonPage = new PokemonPage(page)
         await pokemonPage.goto()
@@ -37,7 +37,7 @@ test.describe('Smoke end to end', () => {
         expect(await pokemonPage.warningMessage.textContent()).toEqual('No se selecciono una imagen de pokemon')
     })
 
-    test('Warning message when pokemon does not has name', async ({page}) => {
+    test('[6] Warning message when pokemon does not has name', async ({page}) => {
         const pokemonPage = new PokemonPage(page)
         await pokemonPage.goto()
         await pokemonPage.listImages.getByAltText(data.image).click()
@@ -46,7 +46,7 @@ test.describe('Smoke end to end', () => {
         expect(await pokemonPage.warningMessage.textContent()).toEqual('Falta ingresar el Nombre')
     })
 
-    test('Warning message when pokemon does not has hp', async ({page}) => {
+    test('[7] Warning message when pokemon does not has hp', async ({page}) => {
         const pokemonPage = new PokemonPage(page)
         await pokemonPage.goto()
         await pokemonPage.listImages.getByAltText(data.image).click()
@@ -56,7 +56,7 @@ test.describe('Smoke end to end', () => {
         expect(await pokemonPage.warningMessage.textContent()).toEqual('Falta ingresar la Vida')
     })
 
-    test('Warning message when pokemon does not has attack', async ({page}) => {
+    test('[8] Warning message when pokemon does not has attack', async ({page}) => {
         const pokemonPage = new PokemonPage(page)
         await pokemonPage.goto()
         await pokemonPage.listImages.getByAltText(data.image).click()
@@ -67,7 +67,7 @@ test.describe('Smoke end to end', () => {
         expect(await pokemonPage.warningMessage.textContent()).toEqual('Falta ingresar el Ataque')
     })
     
-    test('Warning message when pokemon does not has speed', async ({page}) => {
+    test('[9] Warning message when pokemon does not has speed', async ({page}) => {
         const pokemonPage = new PokemonPage(page)
         await pokemonPage.goto()
         await pokemonPage.listImages.getByAltText(data.image).click()
@@ -79,7 +79,7 @@ test.describe('Smoke end to end', () => {
         expect(await pokemonPage.warningMessage.textContent()).toEqual('Falta ingresar la Velocidad')
     })
     
-    test('Warning message when pokemon does not has defense', async ({page}) => {
+    test('[10] Warning message when pokemon does not has defense', async ({page}) => {
         const pokemonPage = new PokemonPage(page)
         await pokemonPage.goto()
         await pokemonPage.listImages.getByAltText(data.image).click()
@@ -92,7 +92,7 @@ test.describe('Smoke end to end', () => {
         expect(await pokemonPage.warningMessage.textContent()).toEqual('Falta ingresar la Defensa')
     })
     
-    test('Card created', async ({page}) => {
+    test('[11] Card created', async ({page}) => {
         const pokemonPage = new PokemonPage(page)
         await pokemonPage.goto()
         await pokemonPage.listImages.getByAltText(data.image).click()
@@ -106,7 +106,7 @@ test.describe('Smoke end to end', () => {
         await expect(await pokemonPage.showroomCardContainer(1)).toBeVisible()
     })
 
-    test('Verify card elements', async ({page}) => {
+    test('[12] Verify card elements', async ({page}) => {
         const pokemonPage = new PokemonPage(page)
         await pokemonPage.goto()
         await pokemonPage.listImages.getByAltText(data.image).click()
@@ -128,7 +128,7 @@ test.describe('Smoke end to end', () => {
         await expect(await pokemonPage.getDeleteButtonInCard(1)).toBeVisible()
     })
 
-    test('Delete card', async ({page}) => {
+    test('[13] Delete card', async ({page}) => {
         const pokemonPage = new PokemonPage(page)
         await pokemonPage.goto()
         await pokemonPage.listImages.getByAltText(data.image).click()

@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { AzureReporterOptions } from '@alex_neo/playwright-azure-reporter/dist/playwright-azure-reporter';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -19,7 +20,35 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'list',
+  reporter: [
+    ['list'],
+    [
+      '@alex_neo/playwright-azure-reporter',
+      {
+        orgUrl: 'https://dev.azure.com/alopexmm',
+        token: process.env.AZURE_TOKEN,
+        planId: 1,
+        projectName: 'pokemon-card-creator',
+        environment: 'Stage',
+        logging: true,
+        testRunTitle: 'Playwright Test Run',
+        publishTestResultsMode: 'testRun',
+        uploadAttachments: false,
+        attachmentsType: ['screenshot', 'video', 'trace'],
+        testRunConfig: {
+          owner: {
+            displayName: 'Mario Mori',
+          },
+          comment: 'Run by Playwright with Azure pipelines',
+          // the configuration ids of this test run, use
+          // https://dev.azure.com/{organization}/{project}/_apis/test/configurations to get the ids of  your project.
+          // if multiple configuration ids are used in one run a testPointMapper should be used to pick the correct one,
+          // otherwise the results are pushed to all.
+          configurationIds: [1],
+        },
+      } as AzureReporterOptions,
+    ],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
