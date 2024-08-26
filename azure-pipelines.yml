@@ -1,5 +1,5 @@
 steps:
-- bash: echo "$AZURE $ENV $TEST"
+- bash: echo "$AZURE_TOKEN $ENV"
 - script: bash tests-container.sh
   displayName: "Checking if there is an old image"
 - script: docker build -t playwright-tests .
