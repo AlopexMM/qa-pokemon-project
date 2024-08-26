@@ -1,10 +1,9 @@
-variables:
-  - group: TOKENS
-
 steps:
-  - script: bash tests-container.sh
-    displayName: "Checking if there is an old image"
-  - script: docker build -t playwright-tests .
-    displayName: "Build playwright tests container"
-  - script: docker run -e ENV=true -e AZURE_TOKEN=$(AZURE) --rm playwright-tests
-    displayName: "Running tests"
+  variables:
+    - group: TOKENS
+    - script: bash tests-container.sh
+      displayName: "Checking if there is an old image"
+    - script: docker build -t playwright-tests .
+      displayName: "Build playwright tests container"
+    - script: docker run -e ENV=true -e AZURE_TOKEN=$(AZURE) --rm playwright-tests
+      displayName: "Running tests"
