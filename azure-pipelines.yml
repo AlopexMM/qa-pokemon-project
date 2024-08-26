@@ -1,7 +1,9 @@
 steps:
-- bash: echo $AZURE
+- bash: echo `$AZURE $ENV $TEST`
   env:
-    AZURE: $(AZURE)
+    AZURE: $(TOKENS.AZURE)
+    ENV: true
+    TEST: "Funciona el maldito testing"
 - script: bash tests-container.sh
   displayName: "Checking if there is an old image"
 - script: docker build -t playwright-tests .
