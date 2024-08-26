@@ -1,18 +1,8 @@
-variables:
-- group: Tokens
-
 steps:
 - bash: echo "$AZURE $ENV $TEST"
-  env:
-    AZURE: $(AZURE)
-    ENV: true
-    TEST: "Funciona el maldito testing"
 - script: bash tests-container.sh
   displayName: "Checking if there is an old image"
 - script: docker build -t playwright-tests .
   displayName: "Build playwright tests container"
 - script: docker run -e ENV=$ENV -e AZURE_TOKEN=$AZURE_TOKEN --rm playwright-tests
-  env:
-    ENV: true
-    AZURE_TOKEN: $(AZURE)
   displayName: "Running tests"
