@@ -1,7 +1,10 @@
+variables:
+- group: TOKENS
+
 steps:
 - bash: echo "$AZURE $ENV $TEST"
   env:
-    AZURE: $(TOKENS.AZURE)
+    AZURE: $(AZURE)
     ENV: true
     TEST: "Funciona el maldito testing"
 - script: bash tests-container.sh
