@@ -1,5 +1,5 @@
 steps:
-- bash: echo `$AZURE $ENV $TEST`
+- bash: echo "$AZURE $ENV $TEST"
   env:
     AZURE: $(TOKENS.AZURE)
     ENV: true
