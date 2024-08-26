@@ -1,4 +1,7 @@
 steps:
+- bash: echo $AZURE
+  env:
+    AZURE: $(AZURE)
 - script: bash tests-container.sh
   displayName: "Checking if there is an old image"
 - script: docker build -t playwright-tests .
