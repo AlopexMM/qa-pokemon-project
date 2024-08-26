@@ -1,8 +1,8 @@
 steps:
-- bash: echo "$AZURE_TOKEN $ENV"
+- bash: echo "$(AZURE_TOKEN) $ENV"
 - script: bash tests-container.sh
   displayName: "Checking if there is an old image"
 - script: docker build -t playwright-tests .
   displayName: "Build playwright tests container"
-- script: docker run -e ENV=$ENV -e AZURE_TOKEN=$AZURE_TOKEN --rm playwright-tests
+- script: docker run -e ENV=true -e AZURE_TOKEN=$(AZURE_TOKEN) --rm playwright-tests
   displayName: "Running tests"
