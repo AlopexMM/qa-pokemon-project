@@ -1,0 +1,7 @@
+steps:
+- script: bash tests-container.sh
+  displayName: 'Checking if there is an old image'
+- script: docker build -t playwright-tests .
+  displayName: 'Build playwright tests container'
+- script: docker run -e ENV=true --rm playwright-tests
+  displayName: 'Running tests'
