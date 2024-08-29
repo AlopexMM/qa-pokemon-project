@@ -4,9 +4,13 @@ import { AzureReporterOptions } from '@alex_neo/playwright-azure-reporter/dist/p
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const environment = {
-  stage: "https://pokemon-creator.alopexmm.ar",
-  dev: "181.47.84.70"
+let environmentURL
+if (process.env.ENV === 'stage') {
+  environmentURL = "https://pokemon-creator.alopexmm.ar"
+} else if (process.env.ENV === 'dev') {
+  environmentURL = "http://localhost:8080"
+} else {
+  environmentURL = "http://localhost:8080"
 }
 
 export default defineConfig({
@@ -52,8 +56,8 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.ENV ? environment.stage : environment.dev,
-    
+    baseURL: environmentURL,
+
 
     testIdAttribute: 'automation-id',
   },
